@@ -5,7 +5,7 @@
 *
 * Simple program to find sum, difference, product and maximum out of 2 numbers
 *
-* @AUTHOR Anish
+* @AUTHOR Anish Timila
 ******************************************************************************/    
     
     
@@ -14,8 +14,8 @@
     .func main
 
 main:
-    BL _Operand                         @ branch to _Operand procedure with return
-    MOV R5, R0                          @ move return value from R0 to R5
+    BL _Operand                         @ Branch _Operand procedure with return
+    MOV R5, R0                          @ moves return value from R0 to R5
     BL _Operation_Code                  @ branch to _Operation_Code procedure with return
     MOV R6, R0                          @ move return value from R0 to R6
     BL _Operand                         @ branch to _Operand procedure with return
@@ -54,21 +54,21 @@ _Operation_Code:
     MOV PC, R4                          @ return
     
 _Compare:
-    CMP R3, # '+'                       @ compare with the constant character '+'
-    BEQ _Sum                            @ branch to equal handler
     CMP R3, # '-'                       @ compare with the constant character '-'
     BEQ _Difference                     @ branch to equal handler
+    CMP R3, # '+'                       @ compare with the constant character '+'
+    BEQ _Sum                            @ branch to equal handler
     CMP R3, # '*'                       @ compare with the constant character '*'
     BEQ _Product                        @ branch to equal handler
     CMP R3, # 'M'                       @ compare with the constant character 'M'
     BEQ _Max                            @ branch to equal handler
+   
+_Difference:
+    SUB R0, R1, R2                      @ subtract R2 from R1 and store the value in R0
+    MOV PC, LR                          @ return
 
 _Sum:
     ADD R0, R1, R2                      @ add R1 and R2 and store the value in R0
-    MOV PC, LR                          @ return
-    
-_Difference:
-    SUB R0, R1, R2                      @ subtract R2 from R1 and store the value in R0
     MOV PC, LR                          @ return
     
 _Product:                           
@@ -82,9 +82,9 @@ _Max:
     MOV PC, LR                          @ return
     
 .data
-Operand_Prompt: .asciz "Please enter a positive number: "
+Operand_Prompt: .asciz "Please enter a number: "
 Input_Value: .asciz "%d"
-Operation_Code_Prompt: .asciz "Please enter one of the operation code from (+,-,*,M): "
+Operation_Code_Prompt: .asciz "Please enter one of the operation code from (+,-,*): "
 Input_Operator: .asciz "%s"
 Printf_Output: .asciz "The output based on the entered operation code is : %d\n"
     
