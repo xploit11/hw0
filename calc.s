@@ -1,8 +1,8 @@
 /******************************************************************************
 * @FILE calc.s
-* @BRIEF simple scanf example
+* @BRIEF simple calculator program
 *
-* Simple example of invoking scanf to retrieve a number from keyboard input
+* Simple calculator to do arithmetic sum, difference, multiply and maximum.
 *
 * @AUTHOR ANISH TIMILA
 ******************************************************************************/
