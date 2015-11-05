@@ -18,14 +18,18 @@ main:
     MOV R5, R0                          @ moves return value from R0 to R5
     BL _Operation_Code                  @ branch to _Operation_Code procedure with return
     MOV R6, R0                          @ move return value from R0 to R6
-    BL _Operand                         @ branch to _Operand procedure with return
+    BL _Operand				@ branch to _Operand procedure with return
+    BL _reg_dump
     MOV R7, R0                          @ move return value from R0 to R7
     MOV R1, R5                          @ move R5 to R1
     MOV R3, R6                          @ move R6 to R3
     MOV R2, R7                          @ move R7 to R2
+    BL _reg_dump
     BL _Compare                         @ branch to _Compare procedure with return
+    BL _reg_dump
     MOV R1, R0                          @ move R0 to R1
     LDR R0, =Printf_Output              @ R0 contains formatted string address
+    BL _reg_dump
     BL printf                           @ call printf
     BL _reg_dump
     B main                              @ call main (to form a loop)
