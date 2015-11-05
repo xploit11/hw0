@@ -206,5 +206,5 @@ _reg_dump:
 debug_str:	.asciz 	    "R%-2d   0x%08X  %011d \n"
 format_str:     .asciz      "%d"
 read_char:	.asciz	    ""
-//printf_str:     .asciz      "The number entered was: %d\n"
+printf_str:     .asciz      "The number entered was: %d\n"
 Printf_Output:  .asciz	    "The output based on the entered operation code is : %d\n"
