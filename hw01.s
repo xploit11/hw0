@@ -23,9 +23,9 @@ main:
     MOV R1, R5                          @ move R5 to R1
     MOV R3, R6                          @ move R6 to R3
     MOV R2, R7                          @ move R7 to R2
-    BL _reg_dump
     BL _Compare                         @ branch to _Compare procedure with return
     MOV R1, R0                          @ move R0 to R1
+    BL _reg_dump
     LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL printf                           @ call printf
     B main                              @ call main (to form a loop)
