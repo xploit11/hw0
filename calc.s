@@ -22,18 +22,11 @@ main:
     MOV R2, R8		    @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
+    MOV R1, R0              @ move R0 to R1
+    LDR R0, =Printf_Output  @ R0 contains formatted string address
     BL  _printf             @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
    
-_exit:  
-    MOV R7, #4              @ write syscall, 4
-    MOV R0, #1              @ output stream to monitor, 1
-    MOV R2, #21             @ print string length
-    LDR R1, =exit_str       @ string at label exit_str:
-    SWI 0                   @ execute syscall
-    MOV R7, #1              @ terminate syscall, 1
-    SWI 0                   @ execute syscall
-
 _printf:
     MOV R4, LR              @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
@@ -218,4 +211,4 @@ format_str:     .asciz      "%d"
 read_char:	.asciz	    ""
 prompt_str:     .asciz      "Type a number and press enter: "
 printf_str:     .asciz      "The number entered was: %d\n"
-exit_str:       .ascii      "Terminating program.\n"
+Printf_Output:  .asci	    "The output based on the entered operation code is : %d\n"
