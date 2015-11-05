@@ -27,6 +27,7 @@ main:
     MOV R1, R0                          @ move R0 to R1
     LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL printf                           @ call printf
+    BL _reg_dump
     B main                              @ call main (to form a loop)
     
 _Operand:
