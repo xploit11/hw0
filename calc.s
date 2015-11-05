@@ -14,9 +14,9 @@ main:
     BL  _scanf
     MOV R8, R0
     BL _getchar             @ branch to scanf procedure with return
-    MOV R9, R0
-    BL _scanf
     MOV R10, R0
+    BL _scanf
+    MOV R9, R0
     MOV R1, R10
     MOV R2, R8		    @ move return value R0 to argument register R1
     MOV R3, R9
@@ -67,20 +67,20 @@ _scanf:
     POP {PC}                @ return
 
 _add:
-    ADD R0, R1,R2
+    ADD R0, R2,R3
     MOV PC, LR
 
 _sub:
-    SUB R0, R1, R2          @ subtract R2 from R1 and store the value in R0
+    SUB R0, R2, R3          @ subtract R2 from R1 and store the value in R0
     MOV PC, LR              @ return
 
 _mul:
-    MUL R0, R1, R2          @ multiply R1 and R2 and store the value in R0
+    MUL R0, R2, R3          @ multiply R1 and R2 and store the value in R0
     MOV PC, LR              @ return
 _max:
-    CMP R1, R2              @ compare R1 and R2 
-    MOVGT R0, R1            @ Move Greater Than
-    MOVLT R0, R2            @ Move Less Than
+    CMP R2, R3              @ compare R1 and R2 
+    MOVGT R0, R2            @ Move Greater Than
+    MOVLT R0, R3            @ Move Less Than
     MOV PC, LR              @ return
 
 _reg_dump:
