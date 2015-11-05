@@ -17,12 +17,12 @@ main:
     MOV R10, R0
     BL _scanf
     MOV R9, R0
-    BL _reg_dump
     MOV R1, R10
     MOV R2, R8		    @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
     MOV R1, R0              @ move R0 to R1
+    BL _reg_dump
     LDR R0, =Printf_Output  @ R0 contains formatted string address
     BL  _printf             @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
