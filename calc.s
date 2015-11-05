@@ -52,16 +52,16 @@ _getchar:
     MOV PC, LR              @ return
  
 _compare:
-    CMP R10, #'+' 
+    CMP R1, #'+' 
     BLEQ _add
     MOV R1, R0              @ compare against the constant char '@'
-    CMP R10, #'-'
+    CMP R1, #'-'
     BLEQ _sub  
     MOV R1, R0            
-    CMP R10, #'*'
+    CMP R1, #'*'
     BLEQ _mul  
     MOV R1, R0            
-    CMP R10, #'M'
+    CMP R1, #'M'
     BLEQ _max
     MOV R1, R0            
     MOV PC, R4
