@@ -11,7 +11,6 @@
     .func main
    
 main:
-    #BL  _prompt            @ branch to prompt procedure with return
     BL  _scanf
     MOV R8, R0
     BL _getchar             @ branch to scanf procedure with return
@@ -20,11 +19,11 @@ main:
     MOV R9, R0
     BL _reg_dump
     MOV R1, R10
-    MOV R2, R8		          @ move return value R0 to argument register R1
+    MOV R2, R8		    @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
     BL  _printf             @ branch to print procedure with return
-    B   _exit               @ branch to exit procedure with no return
+    B   main                @ branch to exit procedure with no return
    
 _exit:  
     MOV R7, #4              @ write syscall, 4
@@ -35,14 +34,6 @@ _exit:
     MOV R7, #1              @ terminate syscall, 1
     SWI 0                   @ execute syscall
 
-_prompt:
-    MOV R7, #4              @ write syscall, 4
-    MOV R0, #1              @ output stream to monitor, 1
-    MOV R2, #23             @ print string length
-    LDR R1, =prompt_str     @ string at label prompt_str:
-    SWI 0                   @ execute syscall
-    MOV PC, LR              @ return
-     
 _printf:
     MOV R4, LR              @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
@@ -73,8 +64,6 @@ _compare:
     CMP R1, #'M'
     BLEQ _max
     MOV R1, R0            
-    #BEQ _correct           @ branch to equal handler
-    #BNE _incorrect         @ branch to not equal handler
     MOV PC, R4
     
 _scanf:
@@ -93,20 +82,15 @@ _add:
 
 _sub:
     SUB R0, R1, R2          @ subtract R2 from R1 and store the value in R0
-    
     MOV PC, LR              @ return
 
 _mul:
     MUL R0, R1, R2          @ multiply R1 and R2 and store the value in R0
-    
     MOV PC, LR              @ return
 _max:
     CMP R1, R2              @ compare R1 and R2 
-    
     MOVGT R0, R1            @ Move Greater Than
-    
     MOVLT R0, R2            @ Move Less Than
-    
     MOV PC, LR              @ return
 
 _reg_dump:
