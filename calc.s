@@ -26,7 +26,7 @@ main:
     LDR R0, =Printf_Output  @ R0 contains formatted string address
     BL  _printf             @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
-   
+  
 _printf:
     MOV R4, LR              @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
@@ -206,6 +206,5 @@ _reg_dump:
 debug_str:	.asciz 	    "R%-2d   0x%08X  %011d \n"
 format_str:     .asciz      "%d"
 read_char:	.asciz	    ""
-prompt_str:     .asciz      "Type a number and press enter: "
-printf_str:     .asciz      "The number entered was: %d\n"
+//printf_str:     .asciz      "The number entered was: %d\n"
 Printf_Output:  .asciz	    "The output based on the entered operation code is : %d\n"
