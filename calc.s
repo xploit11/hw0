@@ -45,14 +45,16 @@ _getchar:
     MOV PC, LR              @ return
  
 _compare:
-    CMP R3, #'+' 
+    CMP R1, #'+' 
     BLEQ _add              @ compare against the constant char '@'
-    CMP R3, #'-'
+    CMP R1, #'-'
     BLEQ _sub             
-    CMP R3, #'*'
+    CMP R1, #'*'
     BLEQ _mul            
-    CMP R3, #'M'
+    CMP R1, #'M'
     BLEQ _max
+    BL _reg_dump
+    MOV PC, R4
     
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
