@@ -14,9 +14,9 @@ main:
     BL  _scanf
     MOV R8, R0
     BL _getchar             @ branch to scanf procedure with return
-    MOV R10, R0
-    BL _scanf
     MOV R9, R0
+    BL _scanf
+    MOV R10, R0
     MOV R1, R10
     MOV R2, R8		    @ move return value R0 to argument register R1
     MOV R3, R9
