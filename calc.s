@@ -21,7 +21,6 @@ main:
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
-    MOV R1, R0                          @ move R0 to R1
     LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL printf                           @ call printf
     B main                              @ call main (to form a loop)
@@ -36,22 +35,19 @@ _getchar:
     AND R0, #0xFF           @ mask out all but the lowest 8 bits
     MOV PC, LR              @ return
 
-_printf:
-    MOV R4, LR               @ store LR since printf call overwrites
-    LDR R0, =printf_str     @ R0 contains formatted string address
-    MOV R1, R1              @ R1 contains printf argument (redundant line)
-    BL printf 		            @ call printf
-    MOV PC, R4                @ return
-    
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
+    MOV R1, R0                          @ move R0 to R1
     CMP R1, #'-'
     BLEQ _sub
+    MOV R1, R0                          @ move R0 to R1
     CMP R1, #'*'
     BLEQ _mul 
+    MOV R1, R0                          @ move R0 to R1
     CMP R1, #'M'
     BLEQ _max
+    MOV R1, R0                          @ move R0 to R1
     BL _reg_dump
     
 _scanf:
@@ -203,6 +199,6 @@ _reg_dump:
 .data
 debug_str:      .asciz     "R%-2d   0x%08X  %011d \n"
 format_str:     .asciz      "%d"
-read_char:	     .asciz	    ""
+read_char:	.asciz	    ""
 printf_str:     .asciz      "The number entered was: %d\n"
 Printf_Output:  .asciz	    "The output based on the entered operation code is : %d\n"
