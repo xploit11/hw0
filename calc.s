@@ -21,8 +21,7 @@ main:
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
-    #MOV R1, R0              @ move R0 to R1
-    LDR R0, =Printf_Output  @ R0 contains formatted string address
+    MOV R1, R0              @ move R0 to R1
     BL  _printf             @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
   
