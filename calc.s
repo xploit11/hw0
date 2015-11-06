@@ -52,6 +52,7 @@ _compare:
     CMP R1, #'*'
     BLEQ _mul            
     CMP R1, #'M'
+    BL _reg_dump
     BLEQ _max
     MOV PC, R4
     
