@@ -47,10 +47,14 @@ _compare:
     MOV R1, R0              @ move R0 to R1
     CMP R1, #'-'
     BLEQ _sub
+    MOV R1, R0              @ move R0 to R1
     CMP R1, #'*'
     BLEQ _mul 
+    MOV R1, R0              @ move R0 to R1
     CMP R1, #'M'
     BLEQ _max
+    MOV R1, R0              @ move R0 to R1
+    MOV PC, R4
     BL _reg_dump
     
 _scanf:
