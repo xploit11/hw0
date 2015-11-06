@@ -41,9 +41,10 @@ _getchar:
 _printf:
     MOV R4, LR              @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
-    MOV R1, R1              @ R1 contains printf argument (redundant line)
-    BL printf               @ call printf
-    MOV PC, R4              @ return
+    #MOV R1, R1              @ R1 contains printf argument (redundant line)
+    BL printf 		    @ call printf
+    MOV LR, R4
+    MOV PC, LR              @ return
     
 _compare:
     CMP R1, #'+' 
