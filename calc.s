@@ -54,7 +54,6 @@ _compare:
     CMP R1, #'M'
     BL _reg_dump
     BLEQ _max
-    MOV PC, R4
     
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
