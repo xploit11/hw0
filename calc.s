@@ -21,6 +21,7 @@ main:
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
+    MOV R1, R0                          @ move R0 to R1
     LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL printf                           @ call printf
     B main                              @ call main (to form a loop)
@@ -38,16 +39,13 @@ _getchar:
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
-    MOV R1, R0                          @ move R0 to R1
     CMP R1, #'-'
     BLEQ _sub
-    MOV R1, R0                          @ move R0 to R1
     CMP R1, #'*'
     BLEQ _mul 
-    MOV R1, R0                          @ move R0 to R1
     CMP R1, #'M'
     BLEQ _max
-    MOV R1, R0                          @ move R0 to R1
+    LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL _reg_dump
     
 _scanf:
