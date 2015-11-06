@@ -21,6 +21,7 @@ main:
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
+    MOV R1, R0                          @ move R0 to R1
     BL  _printf             @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
   
@@ -44,17 +45,12 @@ _printf:
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
-    MOV R1, R0              @ move R0 to R1
     CMP R1, #'-'
     BLEQ _sub
-    MOV R1, R0              @ move R0 to R1
     CMP R1, #'*'
     BLEQ _mul 
-    MOV R1, R0              @ move R0 to R1
     CMP R1, #'M'
     BLEQ _max
-    MOV R1, R0              @ move R0 to R1
-    MOV PC, R4
     BL _reg_dump
     
 _scanf:
