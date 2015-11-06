@@ -25,7 +25,7 @@ main:
     BL _reg_dump
     LDR R0, =Printf_Output  @ R0 contains formatted string address
     BL  _printf             @ branch to print procedure with return
-    MOV PC, R4
+    #MOV PC, R4
     B   main                @ branch to exit procedure with no return
   
 _getchar:
