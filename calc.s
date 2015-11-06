@@ -24,8 +24,7 @@ main:
     MOV R1, R0              @ move R0 to R1
     BL _reg_dump
     LDR R0, =Printf_Output  @ R0 contains formatted string address
-    BL  _printf             @ branch to print procedure with return
-    #MOV PC, R4
+    BL  printf              @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
   
 _getchar:
@@ -38,12 +37,12 @@ _getchar:
     AND R0, #0xFF           @ mask out all but the lowest 8 bits
     MOV PC, LR              @ return
 
-_printf:
-    PUSH {LR}               @ store LR since printf call overwrites
-    LDR R0, =printf_str     @ R0 contains formatted string address
-    MOV R1, R1              @ R1 contains printf argument (redundant line)
-    BL printf 		    @ call printf
-    POP {PC}                @ return
+#_printf:
+ #   PUSH {LR}               @ store LR since printf call overwrites
+ #   LDR R0, =printf_str     @ R0 contains formatted string address
+ #   MOV R1, R1              @ R1 contains printf argument (redundant line)
+ #   BL printf 		    @ call printf
+ #   POP {PC}                @ return
     
 _compare:
     CMP R1, #'+' 
