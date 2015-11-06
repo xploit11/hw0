@@ -39,16 +39,15 @@ _getchar:
     MOV PC, LR              @ return
 
 _printf:
-    MOV R4, LR              @ store LR since printf call overwrites
+    PUSH {LR}               @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
-    #MOV R1, R1              @ R1 contains printf argument (redundant line)
+    MOV R1, R1              @ R1 contains printf argument (redundant line)
     BL printf 		    @ call printf
-    MOV LR, R4
-    MOV PC, LR              @ return
+    POP {PC}                @ return
     
 _compare:
     CMP R1, #'+' 
-    BLEQ _add              @ compare against the constant char '@'
+    BLEQ _add               @ compare against the constant char '@'
     CMP R1, #'-'
     BLEQ _sub             
     CMP R1, #'*'
