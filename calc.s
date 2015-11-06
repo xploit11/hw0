@@ -21,7 +21,6 @@ main:
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
     BL _compare
-    MOV R1, R0              @ move R0 to R1
     BL  _printf             @ branch to print procedure with return
     B   main                @ branch to exit procedure with no return
   
@@ -36,15 +35,16 @@ _getchar:
     MOV PC, LR              @ return
 
 _printf:
-    PUSH {LR}               @ store LR since printf call overwrites
+    MOV R4, LR               @ store LR since printf call overwrites
     LDR R0, =printf_str     @ R0 contains formatted string address
     MOV R1, R1              @ R1 contains printf argument (redundant line)
     BL printf 		            @ call printf
-    POP {PC}                @ return
+    MOV PC, R4                @ return
     
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
+    MOV R1, R0              @ move R0 to R1
     CMP R1, #'-'
     BLEQ _sub
     CMP R1, #'*'
