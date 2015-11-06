@@ -45,7 +45,6 @@ _compare:
     BLEQ _mul 
     CMP R1, #'M'
     BLEQ _max
-    LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL _reg_dump
     
 _scanf:
