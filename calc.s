@@ -47,18 +47,13 @@ _printf:
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
-    MOV R1, R0
     CMP R1, #'-'
     BLEQ _sub
-    MOV R1, R0
     CMP R1, #'*'
     BLEQ _mul 
-    MOV R1, R0
     CMP R1, #'M'
     BLEQ _max
-    MOV R1, R0
     BL _reg_dump
-    MOV PC, R4
     
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
