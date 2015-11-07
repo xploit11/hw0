@@ -11,17 +11,18 @@
     .func main
    
 main:
-    BL  _scanf		    @
-    MOV R8, R0		    @
+    BL  _scanf		            @
+    MOV R8, R0		            @
     BL _getchar             @ branch to scanf procedure with return
-    MOV R10, R0		    @
-    BL _scanf		    @
-    MOV R9, R0		    @
-    MOV R1, R10		    @
-    MOV R2, R8		    @ move return value R0 to argument register R1
-    MOV R3, R9		    @
-    BL _compare		    @
-    MOV R1, R0 		    @
+    MOV R10, R0		           @
+    BL _scanf		             @
+    MOV R9, R0		            @
+    MOV R1, R10		           @
+    MOV R2, R8		            @ move return value R0 to argument register R1
+    MOV R3, R9		            @
+    BL _compare		           @
+    MOV R1, R0 		           @
+    MOV R1, R0
     BL _printf              @ call printf
     B main                  @ call main (to form a loop)
     
@@ -43,14 +44,14 @@ _getchar:
     MOV PC, LR              @ return
 
 _compare:
-    CMP R1, #'+' 	    @
+    CMP R1, #'+' 	          @
     BEQ _add                @ compare against the constant char '@'
-    CMP R1, #'-'	    @
-    BEQ _sub		    @
-    CMP R1, #'*'	    @
-    BEQ _mul 		    @
-    CMP R1, #'M'	    @
-    BEQ _max		    @
+    CMP R1, #'-'	           @
+    BEQ _sub		              @
+    CMP R1, #'*'	           @
+    BEQ _mul 		             @
+    CMP R1, #'M'	           @
+    BEQ _max		              @
     MOV PC, R4              @ return
     
 _scanf:
@@ -64,8 +65,8 @@ _scanf:
     POP {PC}                @ return
 
 _add:
-    ADD R0, R2,R3	    @
-    MOV PC, LR		    @
+    ADD R0, R2,R3	          @
+    MOV PC, LR		            @
 
 _sub:
     SUB R0, R2, R3          @ subtract R2 from R1 and store the value in R0
@@ -82,6 +83,6 @@ _max:
     
 .data
 format_str:     .asciz      "%d"
-read_char:	.asciz	    ""
+read_char:	     .asciz	    ""
 printf_str:     .asciz      "\n"
 Printf_Output:  .asciz	    "The output based on the entered operation code is : %d\n"
