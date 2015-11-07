@@ -83,5 +83,4 @@ _max:
 .data
 format_str:     .asciz      "%d"
 read_char:	     .asciz	    ""
-printf_str:     .asciz      "The number entered was %d\n"
-Printf_Output:  .asciz	    "The output based on the entered operation code is : %d\n"
+printf_str:     .asciz     "The output based on the entered operation code is : %d\n"
