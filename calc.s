@@ -23,16 +23,7 @@ main:
     BL _reg_dump
     BL _compare
     BL _printf                           @ call printf
-    B _exit                              @ call main (to form a loop)
-    
-_exit:  
-    MOV R7, #4              @ write syscall, 4
-    MOV R0, #1              @ output stream to monitor, 1
-    MOV R2, #21             @ print string length
-    LDR R1, =exit_str       @ string at label exit_str:
-    SWI 0                   @ execute syscall
-    MOV R7, #1              @ terminate syscall, 1
-    SWI 0                   @ execute syscall
+    B main                              @ call main (to form a loop)
     
 _printf:
     MOV R4, LR              @ store LR since printf call overwrites
