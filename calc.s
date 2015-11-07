@@ -22,8 +22,6 @@ main:
     MOV R3, R9
     BL _compare
     MOV R1, R0 
-    BL _reg_dump
-    MOV R1, R0 
     BL _printf                           @ call printf
     B main                              @ call main (to form a loop)
     
