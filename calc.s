@@ -20,8 +20,9 @@ main:
     MOV R1, R10
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
-    BL _reg_dump
     BL _compare
+    BL _reg_dump
+    MOV R1, R0 
     BL _printf                           @ call printf
     B main                              @ call main (to form a loop)
     
@@ -45,16 +46,12 @@ _getchar:
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
-    MOV R1, R0 
     CMP R1, #'-'
     BLEQ _sub
-    MOV R1, R0 
     CMP R1, #'*'
     BLEQ _mul 
-    MOV R1, R0 
     CMP R1, #'M'
     BLEQ _max
-    MOV R1, R0 
     MOV PC, R4              @ return
     
 _scanf:
