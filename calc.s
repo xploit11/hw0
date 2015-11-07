@@ -20,14 +20,27 @@ main:
     MOV R1, R10
     MOV R2, R8		            @ move return value R0 to argument register R1
     MOV R3, R9
+    BL _reg_dump
     BL _compare
-    BL _reg_dump
-    MOV R1, R0                          @ move R0 to R1
-    BL _reg_dump
-    LDR R0, =Printf_Output              @ R0 contains formatted string address
-    BL printf                           @ call printf
-    B main                              @ call main (to form a loop)
+    BL _printf                           @ call printf
+    B _exit                              @ call main (to form a loop)
     
+_exit:  
+    MOV R7, #4              @ write syscall, 4
+    MOV R0, #1              @ output stream to monitor, 1
+    MOV R2, #21             @ print string length
+    LDR R1, =exit_str       @ string at label exit_str:
+    SWI 0                   @ execute syscall
+    MOV R7, #1              @ terminate syscall, 1
+    SWI 0                   @ execute syscall
+    
+_printf:
+    MOV R4, LR              @ store LR since printf call overwrites
+    LDR R0, =printf_str     @ R0 contains formatted string address
+    MOV R1, R1              @ R1 contains printf argument (redundant line)
+    BL printf               @ call printf
+    MOV PC, R4              @ return
+
 _getchar:
     MOV R7, #3              @ write syscall, 3
     MOV R0, #0              @ input stream from monitor, 0
@@ -41,13 +54,17 @@ _getchar:
 _compare:
     CMP R1, #'+' 
     BLEQ _add               @ compare against the constant char '@'
+    MOV R1, R0 
     CMP R1, #'-'
     BLEQ _sub
+    MOV R1, R0 
     CMP R1, #'*'
     BLEQ _mul 
+    MOV R1, R0 
     CMP R1, #'M'
     BLEQ _max
-    MOV PC, LR              @ return
+    MOV R1, R0 
+    MOV PC, R4              @ return
     
 _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
@@ -74,7 +91,7 @@ _max:
     CMP R2, R3              @ compare R1 and R2 
     MOVGT R0, R2            @ Move Greater Than
     MOVLT R0, R3            @ Move Less Than
-    MOV PC, LR              @ return
+    MOV PC, LR              @ re turn
     
 _reg_dump:
     PUSH {LR}           @ backup registers
