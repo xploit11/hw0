@@ -22,6 +22,7 @@ main:
     MOV R3, R9
     BL _compare
     MOV R1, R0                          @ move R0 to R1
+    BL _reg_dump
     LDR R0, =Printf_Output              @ R0 contains formatted string address
     BL printf                           @ call printf
     B main                              @ call main (to form a loop)
@@ -45,7 +46,6 @@ _compare:
     BLEQ _mul 
     CMP R1, #'M'
     BLEQ _max
-    BL _reg_dump
     MOV PC, LR              @ return
     
 _scanf:
