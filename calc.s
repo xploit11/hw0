@@ -22,7 +22,6 @@ main:
     MOV R3, R9		            @
     BL _compare		           @
     MOV R1, R0 		           @
-    MOV R1, R0
     BL _printf              @ call printf
     B main                  @ call main (to form a loop)
     
@@ -84,5 +83,5 @@ _max:
 .data
 format_str:     .asciz      "%d"
 read_char:	     .asciz	    ""
-printf_str:     .asciz      "\n"
+printf_str:     .asciz      "The number entered was %d\n"
 Printf_Output:  .asciz	    "The output based on the entered operation code is : %d\n"
