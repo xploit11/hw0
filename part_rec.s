@@ -19,6 +19,7 @@ main:
     MOV R9, R0
     PUSH {R1}           @ store value to stack
     PUSH {R2}           @ store value to stack
+    BL  _reg_dump       @ print register contents
     BL  _cpartision     @ compute the remainder of R1 / R2
     POP {R2}            @ restore values from stack
     POP {R1}            @ restore values from stack
