@@ -203,6 +203,7 @@ _reg_dump:
     POP {PC}            @ return
  
 .data
-debug_str:	.asciz "R%-2d   0x%08X  %011d \n"
-print_str:      .asciz "PARTISION OF %d USING INTEGERS UPTO %d = %d \n"
-exit_str:	.ascii "Terminating program.\n"
+format_str:     .asciz  "%d"
+debug_str:	.asciz 	"R%-2d   0x%08X  %011d \n"
+print_str:      .asciz 	"PARTISION OF %d USING INTEGERS UPTO %d = %d \n"
+exit_str:	.ascii 	"Terminating program.\n"
