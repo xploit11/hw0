@@ -46,18 +46,17 @@ _cpartision:
     POPEQ {PC}
 
 @@@ ELSE
-    PUSH{R1}
-    PUSH{R2}
+    PUSH {R1}
     SUB R1, R1, R2          @ decrement the input argument N=N-M
     BL _cpartision          @a, b already in R1, R2
     MOV R8, LR
-    POP{R1}
+    POP {R1}
     SUB R2, R2, #1          @ decrement the input argument
     BL _cpartision          @a, b already in R1, R2
     MOV R9,LR
     SUB R1, R1, R2          @ decrement the input argument N=N-M
     ADD R0, R8, R9    
-    POP{PC}
+    POP {PC}
    
 _exit:  
     MOV R7, #4          @ write syscall, 4
