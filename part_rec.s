@@ -28,7 +28,7 @@ main:
     B   _exit           @ branch to exit procedure with no return
 
 _cpartision:
-    PUSH{LR}
+    PUSH {LR}
     
 @@@ IF(n==0)
     CMP R1, #0
