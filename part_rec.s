@@ -13,10 +13,8 @@
 main:
     BL  _scanf		@ calls scanf for first operand
     MOV R1, R0		@ move value of R0 to register R1 
-    MOV R8, R0
     BL  _scanf		@ calls scanf for first operand
     MOV R2, R0		@ move value of R0 to register R2 
-    MOV R9, R0
     PUSH {R1}           @ store value to stack
     PUSH {R2}           @ store value to stack
     BL  _reg_dump       @ print register contents
@@ -24,7 +22,6 @@ main:
     POP {R2}            @ restore values from stack
     POP {R1}            @ restore values from stack
     MOV R3, R0          @ copy PARTISION result to R3
-    @BL  _reg_dump       @ print register contents
     BL  _print          @ branch to print procedure with return
     B   _exit           @ branch to exit procedure with no return
 
