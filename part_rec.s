@@ -38,8 +38,8 @@ _cpartision:
 
 @@@ ELSE IF(n<0)
     CMP R1, #0
-    MOVLO R0, #0
-    POPLO {PC}
+    MOVLT R0, #0
+    POPLT {PC}
 
 @@@ ELSE IF(m==0)
     CMP R2, #0
@@ -48,10 +48,12 @@ _cpartision:
 
 @@@ ELSE
     PUSH {R1}
+    PUSH {R2}
     SUB R1, R1, R2          @ decrement the input argument N=N-M
     BL _cpartision          @a, b already in R1, R2
-    MOV R8, LR
+    POP {R2}
     POP {R1}
+    PUSH {R0}
     SUB R2, R2, #1          @ decrement the input argument
     BL _cpartision          @a, b already in R1, R2
     MOV R9,LR
