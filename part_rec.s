@@ -38,12 +38,12 @@ _cpartision:
 
 @@@ ELSE IF(n<0)
     CMP R1, #0
-    MOVLO R0, #1
+    MOVLO R0, #0
     POPLO {PC}
 
 @@@ ELSE IF(m==0)
     CMP R2, #0
-    MOVEQ R0, #1
+    MOVEQ R0, #0
     POPEQ {PC}
 
 @@@ ELSE
