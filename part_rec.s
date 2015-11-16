@@ -56,9 +56,8 @@ _cpartision:
     PUSH {R0}
     SUB R2, R2, #1          @ decrement the input argument
     BL _cpartision          @a, b already in R1, R2
-    MOV R9,LR
-    SUB R1, R1, R2          @ decrement the input argument N=N-M
-    ADD R0, R8, R9    
+    POP {R8}
+    ADD R1, R0, R8    
     POP {PC}
    
 _exit:  
