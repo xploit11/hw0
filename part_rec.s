@@ -51,14 +51,11 @@ _cpartision:
     BL _cpartision          @a, b already in R1, R2
     POP {R2}
     POP {R1}
-    BL  _reg_dump       @ print register contents
-    /*
     PUSH {R0}
     SUB R2, R2, #1          @ decrement the input argument M=M-1
     BL _cpartision          @a, b already in R1, R2
     POP {R8}
     ADD R1, R0, R8
-    */    
     POP {PC}
    
 _exit:  
