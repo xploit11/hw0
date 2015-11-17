@@ -19,11 +19,11 @@ main:
     POP {R1}
     PUSH {R1}           @ store value to stack
     PUSH {R2}           @ store value to stack
-    BL  _reg_dump       @ print register contents
     BL  _cpartision     @ compute the remainder of R1 / R2
     POP {R2}            @ restore values from stack
     POP {R1}            @ restore values from stack
     MOV R3, R0          @ copy PARTISION result to R3
+    BL  _reg_dump       @ print register contents
     BL  _print          @ branch to print procedure with return
     B   _exit           @ branch to exit procedure with no return
 
