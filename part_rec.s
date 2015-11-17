@@ -12,15 +12,16 @@
    
 main:
     BL  _scanf		@ calls scanf for first operand
-    MOV R4, R0		@ move value of R0 to register R1 
+    MOV R1, R0		@ move value of R0 to register R1 
+    PUSH {R1}
     BL  _scanf		@ calls scanf for first operand
-    MOV R5, R0		@ move value of R0 to register R2 
-    PUSH {R4}           @ store value to stack
-    PUSH {R5}           @ store value to stack
+    MOV R2, R0		@ move value of R0 to register R2 
+    @PUSH {R1}           @ store value to stack
+    PUSH {R2}           @ store value to stack
     BL  _reg_dump       @ print register contents
     BL  _cpartision     @ compute the remainder of R1 / R2
-    POP {R5}            @ restore values from stack
-    POP {R4}            @ restore values from stack
+    POP {R2}            @ restore values from stack
+    POP {R1}            @ restore values from stack
     MOV R3, R0          @ copy PARTISION result to R3
     BL  _print          @ branch to print procedure with return
     B   _exit           @ branch to exit procedure with no return
@@ -29,29 +30,29 @@ _cpartision:
     PUSH {LR}
     
 @@@ IF(n==0)
-    CMP R4, #0
+    CMP R1, #0
     MOVEQ R0, #1
     POPEQ {PC}
 
 @@@ ELSE IF(n<0)
-    CMP R4, #0
+    CMP R1, #0
     MOVLT R0, #0
     POPLT {PC}
 
 @@@ ELSE IF(m==0)
-    CMP R5, #0
+    CMP R2, #0
     MOVEQ R0, #0
     POPEQ {PC}
 
 @@@ ELSE
-    PUSH {R4}
-    PUSH {R5}
-    SUB R4, R4, R5          @ decrement the input argument N=N-M
+    PUSH {R1}
+    PUSH {R2}
+    SUB R1, R1, R2          @ decrement the input argument N=N-M
     BL _cpartision          @a, b already in R1, R2
-    POP {R5}
-    POP {R4}
+    POP {R2}
+    POP {R1}
     PUSH {R0}
-    SUB R5, R5, #1          @ decrement the input argument M=M-1
+    SUB R2, R2, #1          @ decrement the input argument M=M-1
     BL _cpartision          @a, b already in R1, R2
     POP {R8}
     ADD R1, R0, R8    
