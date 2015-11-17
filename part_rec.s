@@ -23,7 +23,6 @@ main:
     POP {R2}            @ restore values from stack
     POP {R1}            @ restore values from stack
     MOV R3, R0          @ copy PARTISION result to R3
-    BL  _reg_dump       @ print register contents
     BL  _print          @ branch to print procedure with return
     B   _exit           @ branch to exit procedure with no return
 
@@ -53,6 +52,7 @@ _cpartision:
     POP {R2}
     POP {R1}
     PUSH {R0}
+    BL  _reg_dump       @ print register contents
     SUB R2, R2, #1          @ decrement the input argument M=M-1
     BL _cpartision          @a, b already in R1, R2
     POP {R8}
