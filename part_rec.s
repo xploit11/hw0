@@ -49,9 +49,9 @@ _cpartision:
     PUSH {R2}
     SUB R1, R1, R2          @ decrement the input argument N=N-M
     BL _cpartision          @a, b already in R1, R2
-    BL  _reg_dump       @ print register contents
     POP {R2}
     POP {R1}
+    BL  _reg_dump       @ print register contents
     /*
     PUSH {R0}
     SUB R2, R2, #1          @ decrement the input argument M=M-1
