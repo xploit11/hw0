@@ -29,7 +29,7 @@ main:
     MOV R2, R7          @ move R7 to R2
     MOV R3, R8          @ move R8 to R3
     BL  _print          @ branch to print procedure with return
-    B   main           @ branch to exit procedure with no return
+    B   main            @ branch to exit procedure with no return
 
 _cpartision:
     PUSH {LR}		@ store value to stack
