@@ -23,11 +23,11 @@ main:
     POP {R2}            @ restore values from stack
     POP {R1}            @ restore values from stack
     MOV R6, R0          @ copy PARTISION result to R3
-    MOV R7, R1
-    MOV R8, R2
-    MOV R1, R8          @ copy PARTISION result to R3
-    MOV R2, R6
-    MOV R8, R7
+    MOV R7, R1          @ move R1 to R7
+    MOV R8, R2          @ move R2 to R8
+    MOV R1, R8          @ move R8 to R1
+    MOV R2, R6          @ move R6 to R2
+    MOV R3, R7          @ move R7 to R3
     BL  _print          @ branch to print procedure with return
     B   main           @ branch to exit procedure with no return
 
