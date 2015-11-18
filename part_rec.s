@@ -22,9 +22,14 @@ main:
     BL  _cpartision     @ compute the remainder of R1 / R2
     POP {R2}            @ restore values from stack
     POP {R1}            @ restore values from stack
-    MOV R3, R0          @ copy PARTISION result to R3
+    MOV R6, R0          @ copy PARTISION result to R3
+    MOV R7, R1
+    MOV R8, R2
+    MOV R1, R8          @ copy PARTISION result to R3
+    MOV R2, R6
+    MOV R8, R7
     BL  _print          @ branch to print procedure with return
-    B   _exit           @ branch to exit procedure with no return
+    B   main           @ branch to exit procedure with no return
 
 _cpartision:
     PUSH {LR}		@ store value to stack
@@ -86,5 +91,5 @@ _print:
 
 .data
 format_str:     .asciz  "%d"
-print_str:      .asciz 	"PARTISION OF %d USING INTEGERS UPTO %d = %d \n"
+print_str:      .asciz 	"THERE ARE %d PARTISION OF %d USING INTEGERS UPTO %d\n"
 exit_str:	.ascii 	"Terminating program.\n"
