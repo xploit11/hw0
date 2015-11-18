@@ -13,10 +13,10 @@
 main:
     BL  _scanf		@ calls scanf for first operand
     MOV R1, R0		@ move value of R0 to register R1 
-    PUSH {R1}
+    @PUSH {R1}
     BL  _scanf		@ calls scanf for first operand
     MOV R2, R0		@ move value of R0 to register R2 
-    POP {R1}
+   @ POP {R1}
     PUSH {R1}           @ store value to stack
     PUSH {R2}           @ store value to stack
     BL  _cpartision     @ compute the remainder of R1 / R2
