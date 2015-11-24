@@ -25,13 +25,14 @@ generate:
     STR R8, [R2]            @ write the address of a[i] to a[i]
     ADD R2, R2, #4          @ R2 now has the element address
     ADD R8, R8, #1          @ R2 now has the element address
-    MUL R8, zero , R8          @ converting to negative value.
+    MUL R12, R12 , #0
+    SUB R8, R12, R8                         @ converting to negative value.
     STR R8, [R2]
     B generate           @ branch to next loop iteration
 writedone:
     MOV R0, #0              @ initialze index variable
 
-readloop//sorting function:
+readloop:
     CMP R0, #100            @ check to see if we are done iterating
     BEQ readdone            @ exit loop if done
     LDR R7, =b_array              @ get address of a(put b for array a)
