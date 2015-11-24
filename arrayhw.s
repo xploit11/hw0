@@ -25,7 +25,7 @@ generate:
     STR R8, [R2]            @ write the address of a[i] to a[i]
     ADD R2, R2, #4          @ R2 now has the element address
     ADD R8, R8, #1          @ R2 now has the element address
-    MUL R8, #0, R8          @ converting to negative value.
+    MUL R8, zero , R8          @ converting to negative value.
     STR R8, [R2]
     B generate           @ branch to next loop iteration
 writedone:
