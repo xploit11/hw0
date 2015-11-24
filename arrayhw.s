@@ -5,14 +5,14 @@
 * Simple example of declaring a fixed-width array and traversing over the
 * elements for printing.
 *
-* @AUTHOR Christopher D. McMurrough
+* @AUTHOR ANISH TIMILA
 ******************************************************************************/
  
 .global main
 .func main
    
 main:
-    Scanf
+    BL  _scanf		            @ calls scanf for first operand
     MOV R7, R0
     MOV R0, #0              @ initialze index variable
 generate:
@@ -25,11 +25,12 @@ generate:
     STR R8, [R2]            @ write the address of a[i] to a[i]
     ADD R2, R2, #4          @ R2 now has the element address
     ADD R8, R8, #1          @ R2 now has the element address
-    SUB R8, #0, R8          @ converting to negative value.
+    MUL R8, #0, R8          @ converting to negative value.
     STR R8, [R2]
     B generate           @ branch to next loop iteration
 writedone:
     MOV R0, #0              @ initialze index variable
+
 readloop//sorting function:
     CMP R0, #100            @ check to see if we are done iterating
     BEQ readdone            @ exit loop if done
@@ -42,7 +43,17 @@ readloop//sorting function:
     B   readloop            @ branch to next loop iteration
 readdone:
     B _exit                 @ exit if done
-    
+
+_scanf:
+    PUSH {LR}           @ pushes LR in stack since scanf call overwrites
+    SUB SP, SP, #4      @ make room on stack
+    LDR R0, =format_str @ R0 contains address of format string
+    MOV R1, SP          @ move SP to R1 to store entry on stack
+    BL scanf            @ call scanf
+    LDR R0, [SP]        @ load value at SP into R0
+    ADD SP, SP, #4      @ restore the stack pointer
+    POP {PC}            @ pops PC
+
 _exit:  
     MOV R7, #4              @ write syscall, 4
     MOV R0, #1              @ output stream to monitor, 1
