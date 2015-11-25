@@ -37,7 +37,7 @@ writedone:
 readloop:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ readdone            @ exit loop if done
-    LDR R7, =b_array        @ get address of a(put b for array a)
+    LDR R7, =a_array        @ get address of a(put b for array a)
     LSL R2, R0, #2          @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
     ADD R2, R7, R2          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
     LDR R1, [R2]            @ read the array at address 
