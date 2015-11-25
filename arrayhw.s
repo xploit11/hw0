@@ -22,12 +22,13 @@ generate:
     LDR R1, =a_array        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
-    ADD R8, R7, R0          @ R2 now has the element address
+    ADD R8, R7, R0          @ R8 now has the value n+i
     STR R8, [R2]            @ write the address of a[i] to a[i]
     ADD R2, R2, #4          @ R2 now has the element address
     ADD R8, R8, #1          @ R2 now has the element address
     MOV R12, #0
     SUB R8, R12, R8         @ converting to negative value.
+    ADD R0, R0, #2          @ increment index
     STR R8, [R2]
     B generate              @ branch to next loop iteration
 writedone:
