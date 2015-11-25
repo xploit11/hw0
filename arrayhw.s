@@ -15,7 +15,7 @@ main:
     BL  _scanf		    @ calls scanf for first operand
     MOV R7, R0
     MOV R0, #0              @ initialze index variable
-    BL  _reg_dum	    @ print register contents
+    BL  _reg_dump	    @ print register contents
 generate:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
