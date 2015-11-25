@@ -14,7 +14,7 @@
 main:
     MOV R0, #0              @ initialze index variable            // initialize R0= i to 0.
 writeloop:
-    CMP R0, #100            @ check to see if we are done iterating     //for loop (i<100)
+    CMP R0, #20            @ check to see if we are done iterating     //for loop (i<100)
     BEQ writedone           @ exit loop if done                         //"
     LDR R1, =a              @ get address of a                        //store base address of a in R1 (R1=&a)
     LSL R2, R0, #2          @ multiply index*4 to get array offset    //logical shift left (offset) :this is like multiply but faster than multiply
@@ -25,7 +25,7 @@ writeloop:
 writedone:
     MOV R0, #0              @ initialze index variable
 readloop:
-    CMP R0, #100            @ check to see if we are done iterating     //loop
+    CMP R0, #20            @ check to see if we are done iterating     //loop
     BEQ readdone            @ exit loop if done                       //loop
     LDR R1, =a              @ get address of a                      //
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -63,6 +63,6 @@ _printf:
 .data
 
 .balign 4     //byte allign to make divisible by 4 
-a:              .skip       400      //Defining array. 100 slots *4 byte= 400.
+a:              .skip       80      //Defining array. 100 slots *4 byte= 400.
 printf_str:     .asciz      "a[%d] = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
