@@ -33,7 +33,7 @@ writedone:
     MOV R0, #0              @ initialze index variable
 
 readloop:
-    CMP R0, #100            @ check to see if we are done iterating
+    CMP R0, #20            @ check to see if we are done iterating
     BEQ readdone            @ exit loop if done
     LDR R7, =b_array              @ get address of a(put b for array a)
     LSL R2, R0, #2          @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
@@ -73,6 +73,7 @@ _printf:
 .data
 
 .balign 4
-a:              .skip       80
+a_array:        .skip       80
+b_array:        .skip       80
 printf_str:     .asciz      "a[%d] = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
