@@ -75,5 +75,6 @@ _printf:
 .balign 4
 a_array:        .skip       80
 b_array:        .skip       80
+format_str:     .asciz      "%d"
 printf_str:     .asciz      "a[%d] = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
