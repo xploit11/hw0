@@ -208,5 +208,5 @@ a_array:        .skip       80
 b_array:        .skip       80
 format_str:     .asciz      "%d"
 debug_str:      .asciz      "R%-2d   0x%08X  %011d \n"
-printf_str:     .asciz      "a[%d] = %d"
+printf_str:     .asciz      "a[%d] = %d b= %d\n"
 exit_str:       .ascii      "Terminating program.\n"
