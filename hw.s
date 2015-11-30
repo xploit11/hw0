@@ -34,13 +34,18 @@ generate:
 writedone:
     MOV R0, #0              @ initialze index variable
 
-readloop:
+sorting:
     CMP R0, #20             @ check to see if we are done iterating
-    BEQ readdone            @ exit loop if done
-    LDR R7, =a_array        @ get address of a(put b for array a)
+    BEQ sortdone            @ exit loop if done
+    LDR R1, =a_array        @ get address of a(put b for array a)
     LSL R2, R0, #2          @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
-    ADD R2, R7, R2          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
-    LDR R1, [R2]            @ read the array at address 
+    ADD R2, R1, R2          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
+    STR R8, [R2]            @ read the array at address 
+    MOV R6, R0
+    PUSH {R0}
+    BL nested
+    POP {R0}
+    
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
     PUSH {R2}               @ backup register before printf
@@ -50,11 +55,24 @@ readloop:
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
+    
+    
     ADD R0, R0, #1          @ increment index
-    B   readloop            @ branch to next loop iteration
-readdone:
+    B sorting            @ branch to next loop iteration
+sortdone:
     MOV R0, #0              @ initialize index
-
+   
+nested:
+    ADD R0, R0, #1
+    CMP R0, #19
+    BEQ nesteddone
+    
+    MOVLT R0, #0
+    B nested
+    
+nesteddone:
+    MOV PC LR
+    
 _scanf:
     PUSH {LR}           @ pushes LR in stack since scanf call overwrites
     SUB SP, SP, #4      @ make room on stack
