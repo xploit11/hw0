@@ -15,7 +15,7 @@ main:
     MOV R0, #0              @ initialze index variable            // initialize R0= i to 0.
 writeloop:
     CMP R0, #20            @ check to see if we are done iterating     //for loop (i<100)
-    BEQ writedone           @ exit loop if done                         //"
+    BEQ writedone           @ exit loop if done                         //
     LDR R1, =a              @ get address of a                        //store base address of a in R1 (R1=&a)
     LSL R2, R0, #2          @ multiply index*4 to get array offset    //logical shift left (offset) :this is like multiply but faster than multiply
     ADD R2, R1, R2          @ R2 now has the element address      // R2= base address +offset (R2=&a[i]
