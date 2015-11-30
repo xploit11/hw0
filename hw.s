@@ -65,13 +65,13 @@ sortdone:
 nested:
     ADD R0, R0, #1
     CMP R0, #19
-    BEQ nesteddone
+    #BEQ nesteddone
     
     MOVLT R0, #0
     B nested
     
 nesteddone:
-    MOV PC LR
+    
     
 _scanf:
     PUSH {LR}           @ pushes LR in stack since scanf call overwrites
