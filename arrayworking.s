@@ -40,12 +40,7 @@ sorting:
     LDR R1, =a_array        @ get address of a(put b for array a)
     LSL R2, R0, #2          @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
     ADD R2, R1, R2          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
-    STR R8, [R2]            @ read the array at address 
-    MOV R6, R0
-    PUSH {R0}
-    BL nested
-    POP {R0}
-    
+    LDR R1, [R2]
     PUSH {R0}               @ backup register before printf
     PUSH {R1}               @ backup register before printf
     PUSH {R2}               @ backup register before printf
@@ -55,24 +50,11 @@ sorting:
     POP {R2}                @ restore register
     POP {R1}                @ restore register
     POP {R0}                @ restore register
-    
-    
     ADD R0, R0, #1          @ increment index
     B sorting            @ branch to next loop iteration
 sortdone:
-    MOV R0, #0              @ initialize index
-   
-nested:
-    ADD R0, R0, #1
-    CMP R0, #19
-    #BEQ nesteddone
-    
-    MOVLT R0, #0
-    B nested
-    
-nesteddone:
-    
-    
+    B _exit
+
 _scanf:
     PUSH {LR}           @ pushes LR in stack since scanf call overwrites
     SUB SP, SP, #4      @ make room on stack
@@ -226,5 +208,5 @@ a_array:        .skip       80
 b_array:        .skip       80
 format_str:     .asciz      "%d"
 debug_str:      .asciz      "R%-2d   0x%08X  %011d \n"
-printf_str:     .asciz      "a[%d] = %d\n"
+printf_str:     .asciz      "a[%d] = %d b=%d"
 exit_str:       .ascii      "Terminating program.\n"
