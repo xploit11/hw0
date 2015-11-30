@@ -62,8 +62,8 @@ _printf:
    
 .data
 
-.balign 4     //byte allign to make divisible by 4 
-a:              .skip       80      //Defining array. 100 slots *4 byte= 400.
+.balign 4     
+a:              .skip       80      
 b:              .skip       80
 printf_str:     .asciz      "a[%d] = %d      b=%d"
 exit_str:       .ascii      "Terminating program.\n"
