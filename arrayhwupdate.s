@@ -15,8 +15,8 @@ main:
     BL  _scanf		    @ calls scanf for first operand
     MOV R7, R0
     MOV R0, #0              @ initialze index variable
-    MOV R9, #9999              @ initialze index variable
-    MOV R10, #-9999              @ initialze index variable
+    MOV R9, #999              @ initialze index variable
+    SUB R10, R0, #999              @ initialze index variable
     BL  _reg_dump	    @ print register contents
 generate:
     CMP R0, #20             @ check to see if we are done iterating
