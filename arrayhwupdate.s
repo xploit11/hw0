@@ -15,6 +15,8 @@ main:
     BL  _scanf		    @ calls scanf for first operand
     MOV R7, R0
     MOV R0, #0              @ initialze index variable
+    MOV R9, #9999              @ initialze index variable
+    MOV R10, #-9999              @ initialze index variable
     BL  _reg_dump	    @ print register contents
 generate:
     CMP R0, #20             @ check to see if we are done iterating
@@ -53,6 +55,27 @@ sorting:
     ADD R0, R0, #1          @ increment index
     B sorting            @ branch to next loop iteration
 sortdone:
+    B _exit
+
+reading:
+    CMP R0, #20             @ check to see if we are done iterating
+    BEQ readdone            @ exit loop if done
+    LDR R7, =a_array        @ get address of a(put b for array a)
+    LSL R2, R0, #2          @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
+    ADD R2, R7, R2          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
+    LDR R1, [R2]
+    PUSH {R0}               @ backup register before printf
+    PUSH {R1}               @ backup register before printf
+    PUSH {R2}               @ backup register before printf
+    MOV R2, R1              @ move array value to R2 for printf
+    MOV R1, R0              @ move array index to R1 for printf
+    BL  _printf             @ branch to print procedure with return
+    POP {R2}                @ restore register
+    POP {R1}                @ restore register
+    POP {R0}                @ restore register
+    ADD R0, R0, #1          @ increment index
+    B sorting            @ branch to next loop iteration
+readdone:
     B _exit
 
 _scanf:
