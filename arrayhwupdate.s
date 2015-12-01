@@ -48,6 +48,7 @@ sorting:
     BL nested
     MOV R5, R9
     STR R8, [R5]            @ write the address of a[i] to a[i]
+    ADD R8, R8, #1          @ R2 now has the element address
     MOV R9, #99              @ initialze index variable
     ADD R0, R0, #1          @ increment index
     B sorting            @ branch to next loop iteration
