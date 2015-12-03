@@ -17,7 +17,7 @@ main:
     MOV R0, #0              @ initialze index variable
     MOV R9, #99              @ initialze index variable
     SUB R10, R0, #99        @ initialze index variable
-    BL  _reg_dump	    @ print register contents
+
 generate:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
@@ -86,7 +86,7 @@ reading:
     POP {R1}                @ restore register
     POP {R0}                @ restore register
     ADD R0, R0, #1          @ increment index
-    B sorting            @ branch to next loop iteration
+    B reading            @ branch to next loop iteration
 readdone:
     B _exit
 
