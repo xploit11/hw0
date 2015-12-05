@@ -15,16 +15,15 @@ main:
     BL  _scanf		            @ calls scanf for first operand
     MOV R4, R0		            @ move value of R0 to register R1 
     VLDR S0, [R0]           @ load the value into the VFP register
-    FSITOS S0, R0
+    FSITOD D2, S0
     BL  _scanf		            @ calls scanf for first operand
     MOV R5, R0		            @ move value of R0 to register R1 
     VLDR S1, [R0]           @ load the value into the VFP register
-    FSITOS S1, R0
-    VDIV.F32 S2, S0, S1     @ compute S2 = S0 * S1
-    VCVT.F64.F32 D4, S2     @ covert the result to double precision for printing
+    FSITOD D3, S1
+    VDIV.F64 D4, D2, D3     @ covert the result to double precision for printing
     VMOV R1, R2, D4         @ split the double VFP register into two ARM registers
     BL  _printf_result      @ print the result
-    B   _exit               @ branch to exit procedure with no return
+    B   _main               @ branch to exit procedure with no return
    
 _exit:  
     MOV R7, #4              @ write syscall, 4
@@ -55,5 +54,3 @@ _printf_result:
 result_str:     .asciz      "Multiplication result = %f \n"
 format_str:     .asciz      "%d"
 exit_str:       .ascii      "Terminating program.\n"
-val1:           .float      3.14159
-val2:           .float      0.100
