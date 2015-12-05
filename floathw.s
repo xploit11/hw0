@@ -23,7 +23,7 @@ main:
     VDIV.F64 D4, D2, D3     @ covert the result to double precision for printing
     VMOV R1, R2, D4         @ split the double VFP register into two ARM registers
     BL  _printf_result      @ print the result
-    B   _main               @ branch to exit procedure with no return
+    B   main               @ branch to exit procedure with no return
    
 _exit:  
     MOV R7, #4              @ write syscall, 4
