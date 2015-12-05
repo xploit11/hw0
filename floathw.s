@@ -19,7 +19,7 @@ main:
     BL  _scanf		            @ calls scanf for first operand
     MOV R5, R0		            @ move value of R0 to register R1 
     VLDR S1, [R0]           @ load the value into the VFP register
-    FSITO<S/D> S1, R0
+    FSITOD S1, R0
     VDIV.F32 S2, S0, S1     @ compute S2 = S0 * S1
     VCVT.F64.F32 D4, S2     @ covert the result to double precision for printing
     VMOV R1, R2, D4         @ split the double VFP register into two ARM registers
