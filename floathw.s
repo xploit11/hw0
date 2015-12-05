@@ -5,7 +5,7 @@
 * Simple example of using the ARM FPU to compute the multiplication result of
 * two float values
 *
-* @AUTHOR Christopher D. McMurrough
+* @AUTHOR Anish Timila
 ******************************************************************************/
  
     .global main
