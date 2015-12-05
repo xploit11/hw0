@@ -25,15 +25,6 @@ main:
     BL  _printf_result      @ print the result
     B   main               @ branch to exit procedure with no return
    
-_exit:  
-    MOV R7, #4              @ write syscall, 4
-    MOV R0, #1              @ output stream to monitor, 1
-    MOV R2, #21             @ print string length
-    LDR R1, =exit_str       @ string at label exit_str:
-    SWI 0                   @ execute syscall
-    MOV R7, #1              @ terminate syscall, 1
-    SWI 0                   @ execute syscall
-
 _scanf:
     PUSH {LR}               @ pushes LR in stack since scanf call overwrites
     SUB SP, SP, #4          @ make room on stack
@@ -51,6 +42,5 @@ _printf_result:
     POP {PC}                @ pop LR from stack and return
 
 .data
-result_str:     .asciz      "Multiplication result = %f \n"
+result_str:     .asciz      "%d / %d= %f\n"
 format_str:     .asciz      "%d"
-exit_str:       .ascii      "Terminating program.\n"
