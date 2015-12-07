@@ -24,7 +24,8 @@ main:
     VCVT.S64.S32 S0, S0
     VDIV.F64 D4, D2, D3     @ covert the result to double precision for printing
     VMOV R1, R2, D4         @ split the double VFP register into two ARM registers
-    BL  _printf_result      @ print the result
+    BL  _printf_result1      @ print the result
+    BL  _printf_result2      @ print the result
     B   main               @ branch to exit procedure with no return
    
 _scanf:
@@ -37,12 +38,19 @@ _scanf:
     ADD SP, SP, #4          @ restore the stack pointer
     POP {PC}                @ pops PC
 
-_printf_result:
+_printf_result1:
     PUSH {LR}               @ push LR to stack
-    LDR R0, =result_str     @ R0 contains formatted string address
+    LDR R0, =result_str1     @ R0 contains formatted string address
+    BL printf               @ call printf
+    POP {PC}                @ pop LR from stack and return
+    
+_printf_result2:
+    PUSH {LR}               @ push LR to stack
+    LDR R0, =result_str2     @ R0 contains formatted string address
     BL printf               @ call printf
     POP {PC}                @ pop LR from stack and return
 
 .data
-result_str:     .asciz      "%f\n"
+result_str1:     .asciz      "%d / %d: "
+result_str2:     .asciz      "%f\n"
 format_str:     .asciz      "%d"
