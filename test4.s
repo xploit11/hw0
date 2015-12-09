@@ -3,43 +3,21 @@
 
 main:
 	BL _scanf
-	MOV R6, R0
+	MOV R8, R0
 	BL _scanf
-	MOV R7, R0
-
-	#MOV R6, #2
-	#MOV R7, #2
-
-	VMOV S0, R6
-	VMOV S1, R7
-
-	MOV R1, R6
-	MOV R2, R7
-	BL _printf
-	
+	MOV R9, R0
+	VMOV S0, R8
+	VMOV S1, R9
+	MOV R1, R8
+	MOV R2, R9
+	BL _printf_1
 	VCVT.F32.S32 S0, S0
 	VCVT.F32.S32 S1, S1
-
 	VDIV.F32 S2, S0, S1
 	VCVT.F64.F32 D4, S2
-
 	VMOV R1, R2, D4
-	BL _printf_result
-
+	BL _printf_2
 	B main	
-
-_printf:
-	PUSH {LR}
-	LDR R0, =printf_str
-	MOV R1, R1
-	BL printf
-	POP {PC}
-
-_printf_result:
-	PUSH {LR}
-	LDR R0, =float_str
-	BL printf
-	POP {PC}
 
 _scanf:
 	MOV R4, LR
@@ -51,7 +29,21 @@ _scanf:
 	ADD SP, SP, #4
 	MOV PC, R4
 
+
+_printf_1:
+	PUSH {LR}
+	LDR R0, =str_print
+	MOV R1, R1
+	BL printf
+	POP {PC}
+
+_printf_2:
+	PUSH {LR}
+	LDR R0, =float_print
+	BL printf
+	POP {PC}
+
 .data
-printf_str:	.asciz	"%d / %d = "
-float_str:	.asciz	"%f\n"
+str_print:	.asciz	"%d / %d = "
+float_print:	.asciz	"%f\n"
 format_str:	.asciz	"%d"
