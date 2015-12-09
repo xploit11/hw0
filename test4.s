@@ -21,8 +21,8 @@ main:
 	MOV R1, R8			@ move value of R8 to register R1 
 	MOV R2, R9			@ move value of R9 to register R2 
 	BL _printf_1			@ print the first part with two numbers
-	VCVT.F32.S32 S7, S0		@ covert the S0 to float
-	VCVT.F32.S32 S8, S1		@ covert the S1 to float
+	VCVT.F32.S32 S8, S0		@ covert the S0 to float
+	VCVT.F32.S32 S9, S1		@ covert the S1 to float
 	VDIV.F32 S2, S0, S1		@ computes S2= S0 / S1
 	VCVT.F64.F32 D4, S2		@ covert the result to double precision in 64bit
 	VMOV R1, R2, D4			@ split the double VFP register into two ARM registers
