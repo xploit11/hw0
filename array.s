@@ -123,6 +123,6 @@ a:              .skip       40
 format_str:     .asciz      "%d"
 printf_str:     .asciz      "array_a[%d] = %d\n"
 printf_sum:     .asciz      "sum = %d\n"
-printf_min:     .asciz      "min = %d\n" 
-printf_max:     .asciz      "max = %d\n" 
+printf_min:     .asciz      "minimum = %d\n" 
+printf_max:     .asciz      "maximum = %d\n" 
 exit_str:       .ascii      "Terminating program.\n"
