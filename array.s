@@ -14,6 +14,8 @@
 main:
     MOV R0, #0              @ initialze index variable
     MOV R4, #0
+    SUB R9, R0, #1000      @storing mimum value in R9
+    MOV R10, #1000         @storing maximum value in R10
 writeloop:
     CMP R0, #10            @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
@@ -22,6 +24,7 @@ writeloop:
     MOV R8, R0
     ADD R4, R4, R8
     BL _max
+    BL _min
     POP {R0}
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -51,18 +54,22 @@ readloop:
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
 readdone:
+    MOV R1, R10
+    BL _printmin
+    MOV R1, R9
+    BL _printmax
     MOV R1, R4
     BL _printsum
     B _exit                 @ exit if done
     
 _max:
-    CMP R2, R3              @ compare R2 and R3 
-    MOVGT R11, R2            @ Move Greater Than
+    CMP R8, R9              @ compare R2 and R3 
+    MOVGT R9, R8            @ Move Greater Than
     MOV PC, LR              @ return
 
 _min:
-    CMP R2, R3              @ compare R2 and R3 
-    MOVLT R11, R3            @ Move Less Than
+    CMP R8, R10              @ compare R2 and R3 
+    MOVLT R10, R8            @ Move Less Than
     MOV PC, LR              @ return
 
 _exit:  
