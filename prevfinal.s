@@ -19,6 +19,12 @@ main:
     #BL  _calc_result    @ compute the sum, min, and max of the top 10 values on the stack
     #BL  _print_result   @ print print result
     B   _exit           @ branch to exit procedure with no return
+    
+ _printf:
+    PUSH {LR}               @ store the return address
+    LDR R0, =printf_str     @ R0 contains formatted string address
+    BL printf               @ call printf
+    POP {PC}                @ restore the stack pointer and return
  
  _print_name:
     PUSH {LR}            @ store LR since printf call overwrites
