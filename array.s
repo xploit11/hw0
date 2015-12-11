@@ -23,8 +23,8 @@ writeloop:
     BL _scanf            @ get a number from console
     MOV R8, R0
     ADD R4, R4, R8
-    BL _max
     BL _min
+    BL _max
     POP {R0}
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -92,6 +92,18 @@ _printsum:
     LDR R0, =printf_sum     @ R0 contains formatted string address
     BL printf               @ call printf
     POP {PC}                @ restore the stack pointer and return
+ 
+ _printmin:
+    PUSH {LR}               @ store the return address
+    LDR R0, =printf_min     @ R0 contains formatted string address
+    BL printf               @ call printf
+    POP {PC}                @ restore the stack pointer and return
+ 
+ _printmax:
+    PUSH {LR}               @ store the return address
+    LDR R0, =printf_max     @ R0 contains formatted string address
+    BL printf               @ call printf
+    POP {PC}                @ restore the stack pointer and return
    
  _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
@@ -111,4 +123,6 @@ a:              .skip       40
 format_str:     .asciz      "%d"
 printf_str:     .asciz      "array_a[%d] = %d\n"
 printf_sum:     .asciz      "sum = %d\n"
+printf_min:     .asciz      "min = %d\n" 
+printf_max:     .asciz      "max = %d\n" 
 exit_str:       .ascii      "Terminating program.\n"
