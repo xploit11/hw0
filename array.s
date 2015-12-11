@@ -13,12 +13,14 @@
    
 main:
     MOV R0, #0              @ initialze index variable
+    MOV R4, #0
 writeloop:
     CMP R0, #10            @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
     PUSH {R0}
     BL _scanf            @ get a number from console
     MOV R8, R0
+    ADD R4, R4, R0
     POP {R0}
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -48,6 +50,8 @@ readloop:
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
 readdone:
+    MOV R0, R4
+    BL _printsum
     B _exit                 @ exit if done
     
 _exit:  
@@ -62,6 +66,12 @@ _exit:
 _printf:
     PUSH {LR}               @ store the return address
     LDR R0, =printf_str     @ R0 contains formatted string address
+    BL printf               @ call printf
+    POP {PC}                @ restore the stack pointer and return
+    
+_printsum:
+    PUSH {LR}               @ store the return address
+    LDR R0, =printf_sum     @ R0 contains formatted string address
     BL printf               @ call printf
     POP {PC}                @ restore the stack pointer and return
    
@@ -82,4 +92,5 @@ _printf:
 a:              .skip       40
 format_str:     .asciz      "%d"
 printf_str:     .asciz      "array_a[%d] = %d\n"
+printf_sum:     .asciz      "sum = %d\n"
 exit_str:       .ascii      "Terminating program.\n"
