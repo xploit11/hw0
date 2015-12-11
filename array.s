@@ -20,7 +20,7 @@ writeloop:
     PUSH {R0}
     BL _scanf            @ get a number from console
     MOV R8, R0
-    ADD R4, R4, R0
+    ADD R4, R4, R8
     POP {R0}
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
