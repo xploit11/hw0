@@ -50,7 +50,7 @@ readloop:
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
 readdone:
-    MOV R0, R4
+    MOV R1, R4
     BL _printsum
     B _exit                 @ exit if done
     
