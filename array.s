@@ -21,6 +21,7 @@ writeloop:
     BL _scanf            @ get a number from console
     MOV R8, R0
     ADD R4, R4, R8
+    BL _max
     POP {R0}
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -54,6 +55,16 @@ readdone:
     BL _printsum
     B _exit                 @ exit if done
     
+_max:
+    CMP R2, R3              @ compare R2 and R3 
+    MOVGT R11, R2            @ Move Greater Than
+    MOV PC, LR              @ return
+
+_min:
+    CMP R2, R3              @ compare R2 and R3 
+    MOVLT R11, R3            @ Move Less Than
+    MOV PC, LR              @ return
+
 _exit:  
     MOV R7, #4              @ write syscall, 4
     MOV R0, #1              @ output stream to monitor, 1
