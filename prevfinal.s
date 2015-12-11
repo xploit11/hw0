@@ -127,6 +127,7 @@ a_array:    .skip   40
 name_str:   .asciz  "Anish Timila: 1000929208 \n"
 prompt_str: .asciz  "Please enter 10 positive integers: \n"
 format_str: .asciz  "%d"
+printf_str: .asciz  "a[%d] = %d b= %d\n"
 result_str: .asciz  "Sum: %10d     Min: %10d     Max: %10d \n"
 debug_str:  .asciz  "R%-2d   0x%08X  %011d \n"
 exit_str:   .ascii  "Terminating program.\n"
