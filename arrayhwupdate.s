@@ -36,39 +36,6 @@ generate:
 writedone:
     MOV R0, #0              @ initialze index variable
 
-#sorting:
-
-   # CMP R0, #20             @ check to see if we are done iterating
-   # BEQ sortdone            @ exit loop if done
-   # LDR R5, =b_array        @ get address of a(put b for array a)
-   # LSL R4, R0, #2          @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
-   # ADD R4, R6, R4          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
-   # LDR R2, [R4]	    @value of b
-   # MOV R11, #0
-   # BL nested
-   # MOV R5, R9
-   # STR R8, [R5]            @ write the address of a[i] to a[i]
-   # ADD R8, R8, #1          @ R2 now has the element address
-   # MOV R9, #99              @ initialze index variable
-   # ADD R0, R0, #1          @ increment index
-   # B sorting               @ branch to next loop iteration
-#sortdone:
-   # B _exit
-
-#nested:
-   # CMP R11, #20            @ check to see if we are done iterating
-   # BEQ nesteddone          @ exit loop if done
-   # LDR R5, =a_array        @ get address of a(put b for array a)
-   # LSL R3, R11, #2         @ multiply index*4 to get array offset /////OFFSET TOO STORE STH TO B SAME
-   # ADD R3, R5, R3          @ R2 now has the element address //CHANGE TO ADDRESS OF B TWO REQUIRED 
-   # LDR R1, [R3]	    @value of a
-   # CMP R1, R9
-   # MOVLT R9, R1
-   # ADD R11, R11, #1          @ increment index
-   # B nested
-#nesteddone:
-   # MOV PC, LR
-
 reading:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ readdone            @ exit loop if done
