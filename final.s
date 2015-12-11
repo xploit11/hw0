@@ -12,19 +12,17 @@
 .func main
    
 main:
+    MOV R0, #0              @ initialze index variable
     BL  _scanf		    @ calls scanf for first operand
     MOV R7, R0
-    MOV R0, #0              @ initialze index variable
-    MOV R9, #99              @ initialze index variable
-    SUB R10, R0, #99        @ initialze index variable
 
-generate:
+array:
     CMP R0, #20             @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
     LDR R1, =a_array        @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
-    ADD R8, R7, R0          @ R8 now has the value n+i
+    
     STR R8, [R2]            @ write the address of a[i] to a[i]
     ADD R2, R2, #4          @ R2 now has the element address
     ADD R8, R8, #1          @ R2 now has the element address
@@ -32,7 +30,7 @@ generate:
     SUB R8, R12, R8         @ converting to negative value.
     ADD R0, R0, #2          @ increment index
     STR R8, [R2]
-    B generate              @ branch to next loop iteration
+    B array              @ branch to next loop iteration
 writedone:
     MOV R0, #0              @ initialze index variable
 
