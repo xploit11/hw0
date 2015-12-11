@@ -42,14 +42,16 @@ _get_input:
     MOV R4, LR           @ store LR since _scanf call overwrites LR, R0, R1
     MOV R5, #0           @ initialize loop counter
     LDR R1, =a_array        @ get address of a
+    LSL R2, R0, #2          @ multiply index*4 to get array offset
     _loop1: 
+         ADD R2, R1, R2          @ R2 now has the element address
     	    BL _scanf            @ get a number from console
-            STR R8, [R0]            @ write the address of a[i] to a[i]
+         STR R8, [R0]            @ write the address of a[i] to a[i]
     	    ADD R2, R2, #4          @ R2 now has the element address
     	    ADD R8, R8, #1          @ R2 now has the element address
-            ADD R5, R5, #1       @ increment loop counter
-            CMP R5, #10          @ check for end of loop
-            BNE _loop1           @ loop if necessary
+         ADD R5, R5, #1       @ increment loop counter
+         CMP R5, #10          @ check for end of loop
+         BNE _loop1           @ loop if necessary
     MOV PC, R4           @ return
     
 _calc_result:
