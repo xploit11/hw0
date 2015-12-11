@@ -1,11 +1,11 @@
 /******************************************************************************
-* @FILE array.s
-* @BRIEF simple array declaration and iteration example
+* @FILE FINAL.s
+* @BRIEF simple array declaration and iteration example wth min, max and sum.
 *
 * Simple example of declaring a fixed-width array and traversing over the
-* elements for printing.
+* elements for printing and calculation of minimum, maximum, and sum.
 *
-* @AUTHOR Christopher D. McMurrough
+* @AUTHOR ANISH TIMILA
 ******************************************************************************/
  
 .global main
@@ -13,19 +13,19 @@
    
 main:
     MOV R0, #0              @ initialze index variable
-    MOV R4, #0
-    SUB R9, R0, #1000      @storing mimum value in R9
-    MOV R10, #1000         @storing maximum value in R10
+    MOV R4, #0              @ initialization of R4 to 0
+    SUB R9, R0, #1000       @storing mimum value in R9
+    MOV R10, #1000          @storing maximum value in R10
 writeloop:
-    CMP R0, #10            @ check to see if we are done iterating
+    CMP R0, #10             @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
-    PUSH {R0}
-    BL _scanf            @ get a number from console
-    MOV R8, R0
-    ADD R4, R4, R8
-    BL _min
-    BL _max
-    POP {R0}
+    PUSH {R0}               @ backing up R0
+    BL _scanf               @ get a number from console
+    MOV R8, R0              @ moving the input to R8
+    ADD R4, R4, R8          @ calculation for sum
+    BL _min                 @ branch link to  _min
+    BL _max                 @ branch link to _max
+    POP {R0}                @ restoring value of R0
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
@@ -36,7 +36,7 @@ writedone:
     MOV R0, #0              @ initialze index variable
  
 readloop:
-    CMP R0, #10            @ check to see if we are done iterating
+    CMP R0, #10             @ check to see if we are done iterating
     BEQ readdone            @ exit loop if done
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
@@ -54,12 +54,12 @@ readloop:
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
 readdone:
-    MOV R1, R10
-    BL _printmin
-    MOV R1, R9
-    BL _printmax
-    MOV R1, R4
-    BL _printsum
+    MOV R1, R10             @ moving value of R10 to R1
+    BL _printmin            @ calling _printmin function
+    MOV R1, R9              @ moving value of R9 to R1
+    BL _printmax            @ calling _printmin function
+    MOV R1, R4              @ moving value of R4 to R1
+    BL _printsum            @ calling _printmin function
     B _exit                 @ exit if done
     
 _max:
@@ -68,8 +68,8 @@ _max:
     MOV PC, LR              @ return
 
 _min:
-    CMP R8, R10              @ compare R2 and R3 
-    MOVLT R10, R8            @ Move Less Than
+    CMP R8, R10             @ compare R2 and R3 
+    MOVLT R10, R8           @ Move Less Than
     MOV PC, LR              @ return
 
 _exit:  
