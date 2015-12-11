@@ -16,10 +16,14 @@ main:
 writeloop:
     CMP R0, #10            @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
+    PUSH {R0}
+    BL _scanf            @ get a number from console
+    MOV R8, R0
+    POP {R0}
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
-    STR R2, [R2]            @ write the address of a[i] to a[i]
+    STR R2, R8            @ write the address of a[i] to a[i]
     ADD R0, R0, #1          @ increment index
     B   writeloop           @ branch to next loop iteration
 writedone:
