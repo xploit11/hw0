@@ -14,8 +14,7 @@
 main:
     MOV R0, #0              @ initialze index variable
     MOV R4, #0              @ initialization of R4 to 0
-    SUB R9, R0, #1000       @storing mimum value in R9
-    MOV R10, #1000          @storing maximum value in R10
+    
 writeloop:
     CMP R0, #10             @ check to see if we are done iterating
     BEQ writedone           @ exit loop if done
@@ -29,7 +28,7 @@ writeloop:
     LDR R1, =a              @ get address of a
     LSL R2, R0, #2          @ multiply index*4 to get array offset
     ADD R2, R1, R2          @ R2 now has the element address
-    STR R8, [R2]            @ write the address of a[i] to a[i]
+    STR R2, [R8]            @ write the address of a[i] to a[i]
     ADD R0, R0, #1          @ increment index
     B   writeloop           @ branch to next loop iteration
 writedone:
@@ -54,23 +53,8 @@ readloop:
     ADD R0, R0, #1          @ increment index
     B   readloop            @ branch to next loop iteration
 readdone:
-    MOV R1, R10             @ moving value of R10 to R1
-    BL _printmin            @ calling _printmin function
-    MOV R1, R9              @ moving value of R9 to R1
-    BL _printmax            @ calling _printmin function
-    MOV R1, R4              @ moving value of R4 to R1
-    BL _printsum            @ calling _printmin function
     B _exit                 @ exit if done
     
-_max:
-    CMP R8, R9              @ compare R2 and R3 
-    MOVGT R9, R8            @ Move Greater Than
-    MOV PC, LR              @ return
-
-_min:
-    CMP R8, R10             @ compare R2 and R3 
-    MOVLT R10, R8           @ Move Less Than
-    MOV PC, LR              @ return
 
 _exit:  
     MOV R7, #4              @ write syscall, 4
@@ -87,24 +71,6 @@ _printf:
     BL printf               @ call printf
     POP {PC}                @ restore the stack pointer and return
     
-_printsum:
-    PUSH {LR}               @ store the return address
-    LDR R0, =printf_sum     @ R0 contains formatted string address
-    BL printf               @ call printf
-    POP {PC}                @ restore the stack pointer and return
- 
- _printmin:
-    PUSH {LR}               @ store the return address
-    LDR R0, =printf_min     @ R0 contains formatted string address
-    BL printf               @ call printf
-    POP {PC}                @ restore the stack pointer and return
- 
- _printmax:
-    PUSH {LR}               @ store the return address
-    LDR R0, =printf_max     @ R0 contains formatted string address
-    BL printf               @ call printf
-    POP {PC}                @ restore the stack pointer and return
-   
  _scanf:
     PUSH {LR}               @ store LR since scanf call overwrites
     SUB SP, SP, #4          @ make room on stack
